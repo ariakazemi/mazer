@@ -1,0 +1,1160 @@
+/* line 1, /Users/aria/Dropbox/Sequence Maker/style.scss */
+html, body {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  min-height: 100%; }
+
+/* line 8, /Users/aria/Dropbox/Sequence Maker/style.scss */
+body {
+  padding-right: 40%; }
+
+@media only screen and (max-width: 992px) {
+  /* line 13, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  body {
+    padding-right: 0; } }
+
+/* line 17, /Users/aria/Dropbox/Sequence Maker/style.scss */
+body {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh; }
+
+/* line 23, /Users/aria/Dropbox/Sequence Maker/style.scss */
+main {
+  flex-grow: 1;
+  order: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative; }
+
+/* line 30, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.button-collapse {
+  position: fixed;
+  right: 1em;
+  top: 1em;
+  z-index: 10; }
+
+/* line 36, /Users/aria/Dropbox/Sequence Maker/style.scss */
+aside {
+  width: 40%;
+  order: 1;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  counter-reset: ind; }
+  @media only screen and (max-width: 992px) {
+    /* line 36, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    aside {
+      width: 70%; } }
+  /* line 45, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  aside ul.tabs {
+    flex-shrink: 0; }
+  /* line 48, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  aside article {
+    overflow: hidden;
+    position: relative; }
+  /* line 53, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  aside #blocks ul {
+    overflow: auto;
+    counter-reset: section;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    text-align: right; }
+    /* line 63, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    aside #blocks ul .number-ind {
+      background-color: palevioletred;
+      color: white;
+      padding: 0.2em 0.7em;
+      border-radius: 1em;
+      margin-right: 4em;
+      box-shadow: 0 1px 3px -1px gray;
+      font-weight: bold;
+      position: absolute;
+      left: 4.5em;
+      height: 1.5em;
+      line-height: 1.1em;
+      top: 50%;
+      transform: translateY(-50%); }
+    /* line 78, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    aside #blocks ul .type-ind {
+      counter-increment: ind; }
+      /* line 80, /Users/aria/Dropbox/Sequence Maker/style.scss */
+      aside #blocks ul .type-ind:before {
+        content: counter(ind);
+        position: absolute;
+        font-size: 5em;
+        right: 0.1em;
+        top: 0.2em;
+        color: teal; }
+    /* line 90, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    aside #blocks ul section {
+      min-height: 8em;
+      display: block;
+      background-color: teal;
+      margin-top: 0.7em;
+      counter-increment: section;
+      text-align: center;
+      position: relative;
+      width: 100%; }
+      /* line 100, /Users/aria/Dropbox/Sequence Maker/style.scss */
+      aside #blocks ul section.selected {
+        background-color: orange; }
+      /* line 103, /Users/aria/Dropbox/Sequence Maker/style.scss */
+      aside #blocks ul section:after {
+        content: counter(section);
+        font-size: 6em;
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 4em;
+        text-align: center; }
+  /* line 116, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  aside article {
+    flex-grow: 1; }
+  /* line 120, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  aside #code {
+    display: flex;
+    flex-direction: column; }
+    /* line 123, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    aside #code .codem {
+      flex-grow: 1;
+      overflow: auto;
+      position: relative; }
+    /* line 128, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    aside #code .CodeMirror {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      height: auto; }
+      /* line 135, /Users/aria/Dropbox/Sequence Maker/style.scss */
+      aside #code .CodeMirror .CodeMirror-scroll {
+        overflow: auto;
+        height: 100%;
+        position: relative;
+        outline: none; }
+
+/* line 144, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.inputs {
+  display: flex; }
+
+/* line 147, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.inputs input[type="number"] {
+  max-width: 60px; }
+  /* line 149, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  .inputs input[type="number"]::-webkit-inner-spin-button, .inputs input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; }
+
+/* line 156, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.toolbar {
+  box-shadow: 0 0 4px 0 black;
+  z-index: 1; }
+  /* line 159, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  .toolbar .file-field .btn {
+    height: 40px; }
+    /* line 161, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    .toolbar .file-field .btn * {
+      cursor: pointer; }
+
+/* line 167, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#sceneWrapper {
+  flex-grow: 1;
+  background-color: #343434;
+  position: relative;
+  padding: 20px 20px 70px 20px; }
+  /* line 172, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  #sceneWrapper:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url(250px-Truchet_labyrinth.svg);
+    background-size: 150px;
+    z-index: 0;
+    opacity: 0.1; }
+
+/* line 185, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.scene {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 0 15px -5px black;
+  display: flex;
+  flex-wrap: wrap; }
+  /* line 193, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  .scene.cols-1 .module {
+    width: 100%; }
+  /* line 193, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  .scene.cols-2 .module {
+    width: 50%; }
+  /* line 193, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  .scene.cols-3 .module {
+    width: 33.33333%; }
+  /* line 193, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  .scene.cols-4 .module {
+    width: 25%; }
+  /* line 193, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  .scene.cols-5 .module {
+    width: 20%; }
+  /* line 193, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  .scene.cols-6 .module {
+    width: 16.66667%; }
+  /* line 193, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  .scene.cols-7 .module {
+    width: 14.28571%; }
+  /* line 193, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  .scene.cols-8 .module {
+    width: 12.5%; }
+  /* line 193, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  .scene.cols-9 .module {
+    width: 11.11111%; }
+  /* line 197, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  .scene .module {
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease 0s, box-shadow 0.2s ease 0s; }
+    /* line 201, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    .scene .module.selected {
+      z-index: 5;
+      box-shadow: 0 0 0 5px black inset; }
+    /* line 205, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    .scene .module:before {
+      content: "";
+      padding-top: 100%;
+      display: block;
+      transition: transform 0.1s ease 0s;
+      background-size: 103% 103%;
+      background-color: rgba(255, 255, 255, 0.7);
+      background-repeat: no-repeat;
+      background-position: center center; }
+    /* line 218, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    .scene .module[data-rotate="0"]:before {
+      transform: rotateZ(0deg); }
+    /* line 218, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    .scene .module[data-rotate="1"]:before {
+      transform: rotateZ(90deg); }
+    /* line 218, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    .scene .module[data-rotate="2"]:before {
+      transform: rotateZ(180deg); }
+    /* line 218, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    .scene .module[data-rotate="3"]:before {
+      transform: rotateZ(270deg); }
+
+/* line 225, /Users/aria/Dropbox/Sequence Maker/style.scss */
+footer {
+  transform: translateY(100%);
+  transition: transform 0.2s ease 0s;
+  position: fixed;
+  left: 0;
+  right: 40%;
+  bottom: 0;
+  height: 55px;
+  padding-top: 8px;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  z-index: 100; }
+  /* line 230, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  footer.active {
+    transform: translateY(0); }
+  @media only screen and (max-width: 992px) {
+    /* line 225, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    footer {
+      right: 0; } }
+  /* line 245, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  footer .module {
+    width: 39px;
+    position: relative;
+    height: 39px;
+    border: 1px solid #00cdcd;
+    background-size: 100% 100%;
+    cursor: pointer;
+    border-radius: 500px;
+    margin-left: 0.5em;
+    background-color: #00cdcd; }
+    /* line 255, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    footer .module section {
+      position: relative;
+      border-radius: 500px;
+      overflow: hidden;
+      width: 100%;
+      height: 100%; }
+    /* line 263, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    footer .module div {
+      background-color: #001a1a !important; }
+    /* line 266, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    footer .module .tl {
+      border-top-left-radius: 500px; }
+    /* line 269, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    footer .module .tr {
+      border-top-right-radius: 500px; }
+    /* line 272, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    footer .module .bl {
+      border-bottom-left-radius: 500px; }
+    /* line 275, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    footer .module .br {
+      border-bottom-right-radius: 500px; }
+  /* line 280, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  footer .actions {
+    margin-left: auto;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row-reverse; }
+    /* line 285, /Users/aria/Dropbox/Sequence Maker/style.scss */
+    footer .actions button {
+      margin-right: 1em; }
+  /* line 289, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  footer button {
+    height: 100%;
+    width: 55px;
+    cursor: pointer; }
+  /* line 294, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  footer span {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 9.5px;
+    top: -38px;
+    border: 1px solid white;
+    background-color: #343434;
+    border-radius: 3px;
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    font-size: 13px;
+    opacity: 0;
+    transition: opacity 0.25s ease 0s; }
+  /* line 311, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  footer:hover span {
+    opacity: 1; }
+
+/* line 323, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module:before, footer.raw .module:before {
+  transition: none;
+  transform: rotateZ(0);
+  background-color: rgba(0, 128, 128, 0.7); }
+
+/* line 328, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module div, footer.raw .module div {
+  position: absolute;
+  transition-property: width, height, left, top, right, bottom;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  background-color: #b3ffff;
+  width: 20%;
+  height: 20%; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="0"] .tl, footer.raw .module[data-type="0"][data-rotate="0"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="0"] .tr, footer.raw .module[data-type="0"][data-rotate="0"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="0"] .br, footer.raw .module[data-type="0"][data-rotate="0"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="0"] .bl, footer.raw .module[data-type="0"][data-rotate="0"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="1"] .tl, footer.raw .module[data-type="0"][data-rotate="1"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="1"] .tr, footer.raw .module[data-type="0"][data-rotate="1"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="1"] .br, footer.raw .module[data-type="0"][data-rotate="1"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="1"] .bl, footer.raw .module[data-type="0"][data-rotate="1"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="2"] .tl, footer.raw .module[data-type="0"][data-rotate="2"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="2"] .tr, footer.raw .module[data-type="0"][data-rotate="2"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="2"] .br, footer.raw .module[data-type="0"][data-rotate="2"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="2"] .bl, footer.raw .module[data-type="0"][data-rotate="2"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="3"] .tl, footer.raw .module[data-type="0"][data-rotate="3"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="3"] .tr, footer.raw .module[data-type="0"][data-rotate="3"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="3"] .br, footer.raw .module[data-type="0"][data-rotate="3"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="0"][data-rotate="3"] .bl, footer.raw .module[data-type="0"][data-rotate="3"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="0"] .tl, footer.raw .module[data-type="1"][data-rotate="0"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="0"] .tr, footer.raw .module[data-type="1"][data-rotate="0"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="0"] .br, footer.raw .module[data-type="1"][data-rotate="0"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="0"] .bl, footer.raw .module[data-type="1"][data-rotate="0"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px;
+  height: 90%; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="1"] .tl, footer.raw .module[data-type="1"][data-rotate="1"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px;
+  width: 90%; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="1"] .tr, footer.raw .module[data-type="1"][data-rotate="1"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="1"] .br, footer.raw .module[data-type="1"][data-rotate="1"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="1"] .bl, footer.raw .module[data-type="1"][data-rotate="1"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="2"] .tl, footer.raw .module[data-type="1"][data-rotate="2"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="2"] .tr, footer.raw .module[data-type="1"][data-rotate="2"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  height: 90%; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="2"] .br, footer.raw .module[data-type="1"][data-rotate="2"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="2"] .bl, footer.raw .module[data-type="1"][data-rotate="2"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="3"] .tl, footer.raw .module[data-type="1"][data-rotate="3"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="3"] .tr, footer.raw .module[data-type="1"][data-rotate="3"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="3"] .br, footer.raw .module[data-type="1"][data-rotate="3"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  width: 90%; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="1"][data-rotate="3"] .bl, footer.raw .module[data-type="1"][data-rotate="3"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="0"] .tl, footer.raw .module[data-type="2"][data-rotate="0"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px;
+  width: 90%; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="0"] .tr, footer.raw .module[data-type="2"][data-rotate="0"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="0"] .br, footer.raw .module[data-type="2"][data-rotate="0"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  width: 90%; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="0"] .bl, footer.raw .module[data-type="2"][data-rotate="0"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="1"] .tl, footer.raw .module[data-type="2"][data-rotate="1"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="1"] .tr, footer.raw .module[data-type="2"][data-rotate="1"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  height: 90%; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="1"] .br, footer.raw .module[data-type="2"][data-rotate="1"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="1"] .bl, footer.raw .module[data-type="2"][data-rotate="1"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px;
+  height: 90%; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="2"] .tl, footer.raw .module[data-type="2"][data-rotate="2"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px;
+  width: 90%; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="2"] .tr, footer.raw .module[data-type="2"][data-rotate="2"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="2"] .br, footer.raw .module[data-type="2"][data-rotate="2"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  width: 90%; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="2"] .bl, footer.raw .module[data-type="2"][data-rotate="2"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="3"] .tl, footer.raw .module[data-type="2"][data-rotate="3"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="3"] .tr, footer.raw .module[data-type="2"][data-rotate="3"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  height: 90%; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="3"] .br, footer.raw .module[data-type="2"][data-rotate="3"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="2"][data-rotate="3"] .bl, footer.raw .module[data-type="2"][data-rotate="3"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px;
+  height: 90%; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="0"] .tl, footer.raw .module[data-type="3"][data-rotate="0"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px;
+  width: 90%; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="0"] .tr, footer.raw .module[data-type="3"][data-rotate="0"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="0"] .br, footer.raw .module[data-type="3"][data-rotate="0"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="0"] .bl, footer.raw .module[data-type="3"][data-rotate="0"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px;
+  height: 90%; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="1"] .tl, footer.raw .module[data-type="3"][data-rotate="1"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px;
+  width: 90%; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="1"] .tr, footer.raw .module[data-type="3"][data-rotate="1"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  height: 90%; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="1"] .br, footer.raw .module[data-type="3"][data-rotate="1"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="1"] .bl, footer.raw .module[data-type="3"][data-rotate="1"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="2"] .tl, footer.raw .module[data-type="3"][data-rotate="2"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="2"] .tr, footer.raw .module[data-type="3"][data-rotate="2"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  height: 90%; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="2"] .br, footer.raw .module[data-type="3"][data-rotate="2"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  width: 90%; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="2"] .bl, footer.raw .module[data-type="3"][data-rotate="2"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="3"] .tl, footer.raw .module[data-type="3"][data-rotate="3"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="3"] .tr, footer.raw .module[data-type="3"][data-rotate="3"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="3"] .br, footer.raw .module[data-type="3"][data-rotate="3"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  width: 90%; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="3"][data-rotate="3"] .bl, footer.raw .module[data-type="3"][data-rotate="3"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px;
+  height: 90%; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="0"] .tl, footer.raw .module[data-type="4"][data-rotate="0"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px;
+  width: 90%; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="0"] .tr, footer.raw .module[data-type="4"][data-rotate="0"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="0"] .br, footer.raw .module[data-type="4"][data-rotate="0"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  width: 90%; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="0"] .bl, footer.raw .module[data-type="4"][data-rotate="0"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px;
+  height: 90%; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="1"] .tl, footer.raw .module[data-type="4"][data-rotate="1"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px;
+  width: 90%; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="1"] .tr, footer.raw .module[data-type="4"][data-rotate="1"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  height: 90%; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="1"] .br, footer.raw .module[data-type="4"][data-rotate="1"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="1"] .bl, footer.raw .module[data-type="4"][data-rotate="1"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px;
+  height: 90%; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="2"] .tl, footer.raw .module[data-type="4"][data-rotate="2"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px;
+  width: 90%; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="2"] .tr, footer.raw .module[data-type="4"][data-rotate="2"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  height: 90%; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="2"] .br, footer.raw .module[data-type="4"][data-rotate="2"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  width: 90%; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="2"] .bl, footer.raw .module[data-type="4"][data-rotate="2"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px; }
+
+/* line 384, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="3"] .tl, footer.raw .module[data-type="4"][data-rotate="3"] .tl {
+  left: 0;
+  top: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 3px; }
+
+/* line 395, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="3"] .tr, footer.raw .module[data-type="4"][data-rotate="3"] .tr {
+  right: 0;
+  top: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  height: 90%; }
+
+/* line 406, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="3"] .br, footer.raw .module[data-type="4"][data-rotate="3"] .br {
+  right: 0;
+  bottom: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  width: 90%; }
+
+/* line 416, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.raw .module[data-type="4"][data-rotate="3"] .bl, footer.raw .module[data-type="4"][data-rotate="3"] .bl {
+  bottom: 0;
+  left: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 3px;
+  height: 90%; }
+
+/* line 433, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.convention .module div, footer.convention .module div {
+  display: none; }
+
+/* line 437, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.convention .module[data-type="0"]:before, footer.convention .module[data-type="0"]:before {
+  background-image: url(Modules/Con/0.png); }
+
+/* line 437, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.convention .module[data-type="1"]:before, footer.convention .module[data-type="1"]:before {
+  background-image: url(Modules/Con/1.png); }
+
+/* line 437, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.convention .module[data-type="2"]:before, footer.convention .module[data-type="2"]:before {
+  background-image: url(Modules/Con/2.png); }
+
+/* line 437, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.convention .module[data-type="3"]:before, footer.convention .module[data-type="3"]:before {
+  background-image: url(Modules/Con/3.png); }
+
+/* line 437, /Users/aria/Dropbox/Sequence Maker/style.scss */
+#scene.convention .module[data-type="4"]:before, footer.convention .module[data-type="4"]:before {
+  background-image: url(Modules/Con/4.png); }
+
+/* line 445, /Users/aria/Dropbox/Sequence Maker/style.scss */
+footer.raw .module div {
+  width: 35%;
+  height: 35%; }
+
+/* line 452, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.moduleType[data-type="0"] {
+  background-image: url(Modules/Con/0.png); }
+
+/* line 452, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.moduleType[data-type="1"] {
+  background-image: url(Modules/Con/1.png); }
+
+/* line 452, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.moduleType[data-type="2"] {
+  background-image: url(Modules/Con/2.png); }
+
+/* line 452, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.moduleType[data-type="3"] {
+  background-image: url(Modules/Con/3.png); }
+
+/* line 452, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.moduleType[data-type="4"] {
+  background-image: url(Modules/Con/4.png); }
+
+/* line 461, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.template {
+  display: none; }
+
+/* line 464, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.collapsible-header {
+  position: relative;
+  box-shadow: 0 0 0 3px #26a69a inset;
+  background-size: 100%; }
+
+/* line 471, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.input-ind, .output-ind {
+  width: 10px;
+  height: 2px;
+  background-color: #26a69a;
+  position: relative; }
+  /* line 478, /Users/aria/Dropbox/Sequence Maker/style.scss */
+  .input-ind.on:before, .output-ind.on:before {
+    content: "";
+    display: block;
+    width: 3px;
+    height: 13px;
+    left: 4px;
+    background-color: #26a69a;
+    position: absolute; }
+
+/* line 491, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.input-ind.on:before {
+  bottom: 0; }
+
+/* line 494, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.output-ind.on:before {
+  top: 0; }
+
+/* line 498, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.input-inds, .output-inds {
+  display: flex;
+  position: absolute;
+  left: 5px;
+  height: 2px;
+  width: auto;
+  flex-wrap: nowrap;
+  flex-direction: row; }
+
+/* line 507, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.input-inds {
+  bottom: 0; }
+
+/* line 510, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.output-inds {
+  top: 0; }
+
+/* line 515, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.wayGroup li {
+  margin-top: 5px; }
+
+/* line 519, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.wayGroup .collapsible-header {
+  border-radius: 2px;
+  overflow: hidden; }
+
+/* line 526, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.group button:not(:last-child) {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  padding-right: 1rem !important; }
+
+/* line 531, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.group button:not(:first-child) {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  padding-left: 1rem !important; }
+
+/* line 536, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.group button.just-icon {
+  padding-right: 1rem !important; }
+
+/* line 541, /Users/aria/Dropbox/Sequence Maker/style.scss */
+.fileRead {
+  margin-right: 1em; }
+
+/*# sourceMappingURL=style.css.map */

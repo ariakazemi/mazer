@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Squence Maker</title>
+	      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+	<link rel="stylesheet" href="css/materialize.css">
+		<link rel="stylesheet" href="style.css">
+
+	<link rel="stylesheet" href="css/codemirror.css">
+	<link rel="stylesheet" href="css/material.css">
+	<script src="jquery.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<script src="js/string.min.js"></script>
+	<script src="js/smaple.js"></script>
+	<script src="js/codemirror.js"></script>
+	<script src="js/clike.js"></script>
+	<script src="js/FileSaver.min.js"></script>
+	<script src="js/masonry.pkgd.min.js"></script>
+	<script src="script.js"></script>
+</head>
+<body>
+	<aside id="side" class="side-nav fixed">
+
+		<ul class="tabs">
+        <li class="tab col s3"><a href="#blocks">
+        Blocks</a></li>
+        <li class="tab col s3"><a class="active" href="#code">Code</a></li>
+        
+      </ul>
+		
+		<article id="code">
+		<p>
+			<button class="waves-effect waves-light btn" onclick="scene.readAll(true)">Read</button>
+			<button class="waves-effect waves-light orange darken-3 btn" onclick="scene.writeAll()">Write</button>
+			<button class="waves-effect waves-light btn right" onclick="downloadAll()"><i class=" medium material-icons right">file_download</i>Get</button>
+		</p>
+			<p class="codem">
+				<textarea id="code-text" class="materialize-textarea" name="" id="file" cols="30" rows="10">
+				hello
+			</textarea>
+			</p>
+		
+		</article>
+		<article id="blocks">
+			<ul class="collapsible wayGroup" data-collapsible="accordion">
+				
+			</ul>
+			
+		</article>
+	
+	</aside>
+	<a href="#" data-activates="side" class="button-collapse show-on-large btn-floating"><i class="material-icons">menu</i></a>
+	<main>
+	<section class="toolbar blue-grey darken-3 white-text">
+		<div class="inputs">
+			<div class="input-field inline">
+			<input type="number" id="x" placeholder="x" value="5">
+		</div>
+	<div class="input-field inline">
+		<input type="number" id="y" placeholder="y" value="2">
+	</div>
+	<div class="input-field inline">
+		<input type="number" id="entry" placeholder="entry">
+	</div>
+	<div class="input-field inline">
+		<input type="number" id="outry" placeholder="outry">
+	</div>
+	
+	<div class="input-field inline tooltipped" data-tooltip="Style Family">
+			<select name="" id="" onchange="scene.changeFamily(this)">
+			<option value="raw">Raw</option>
+			<option value="convention">Convention</option>
+		</select>
+		</div>
+		</div>
+	<div class="row">
+		
+		<div class="input-field inline">
+			<button onclick="scene.refresh()" class="waves-effect waves-light btn">Refresh</button>
+		</div>
+		<div class="group input-field inline">
+			<button class="dropdown-button waves-effect waves-light btn orange" onclick="scene.save()">
+			
+			Save
+				</button>
+			
+				<button class="waves-effect waves-light btn orange right just-icon tooltipped" onclick="scene.save(true)" data-tooltip="Save as new">
+			<i class="material-icons">add</i>
+				</button>
+		</div>
+		<form class="input-field inline right fileRead file-field "><div class="btn pink btn-floating waves-effect waves-light tooltipped" data-tooltip="Upload sample.cs to edit"  data-position="left"><span><i class="material-icons">insert_drive_file</i></span>
+			<input type="file" onchange="scene.readFile(this)" accept=".cs">
+		</div></form>
+	</div>
+	
+	</section>
+	<section id="sceneWrapper">
+		<div id="scene" class="scene cols-5 raw" data-family="raw">
+
+
+	</div>
+	</section>
+	<footer class="raw">
+		<div class="module" data-type="0" data-rotate="0" onclick="sceneMaker.changeType($('#scene .module.selected')[0],0);">
+			<span class="keyboardShortcut">1</span>
+			<section>
+				<div class="tl"></div>
+		<div class="tr"></div>
+		<div class="bl"></div>
+		<div class="br"></div>
+			</section>
+		</div>
+		<div class="module" data-type="1" data-rotate="0" onclick="sceneMaker.changeType($('#scene .module.selected')[0],1);">
+			<span class="keyboardShortcut">2</span>
+			<section>
+				<div class="tl"></div>
+						<div class="tr"></div>
+						<div class="bl"></div>
+						<div class="br"></div>
+			</section>
+		</div>
+		<div class="module" data-type="2" data-rotate="0" onclick="sceneMaker.changeType($('#scene .module.selected')[0],2);">
+			<span class="keyboardShortcut">3</span>
+			<section>
+				<div class="tl"></div>
+						<div class="tr"></div>
+						<div class="bl"></div>
+						<div class="br"></div>
+			</section>
+		</div>
+		<div class="module" data-type="3" data-rotate="0" onclick="sceneMaker.changeType($('#scene .module.selected')[0],3);">
+			<span class="keyboardShortcut">4</span>
+			<section>
+				<div class="tl"></div>
+						<div class="tr"></div>
+						<div class="bl"></div>
+						<div class="br"></div>
+			</section>
+		</div>
+		<div class="module" data-type="4" data-rotate="0" onclick="sceneMaker.changeType($('#scene .module.selected')[0],4);">
+		<section>
+			<div class="tl"></div>
+			<div class="tr"></div>
+			<div class="bl"></div>
+			<div class="br"></div>
+		</section>
+			<span class="keyboardShortcut">5</span>
+		</div>
+		<div class="actions">
+			<button class="btn-floating cyan darken-1 waves-effect waves-light" onclick="rotate($('#scene .module.selected')[0])">
+		<i class="material-icons large">refresh</i>
+		<span>R</span>
+		</button>
+		<button class="btn-floating black waves-effect waves-light" onclick="sceneMaker.addRow();">
+		<i class="material-icons large">playlist_add</i>
+		<span>v</span>
+		</button>
+		<button class="btn-floating red waves-effect waves-light" onclick="sceneMaker.removeRow();">
+		<i class="material-icons large">delete_sweep</i>
+		<span>v</span>
+		</button>
+		</div>
+	</footer>
+	</main>
+	<div class="module template" data-type="0" data-rotate="0">
+		<div class="tl"></div>
+		<div class="tr"></div>
+		<div class="bl"></div>
+		<div class="br"></div>
+	</div>
+	<div>
+		
+	</div>
+	<li class="set template">
+		<div class="collapsible-header waves-effect waves-light">
+			<div class="input-inds">
+				<!--div class="input-ind"></div-->
+			</div>
+			<div class="output-inds">
+				<!--div class="output-ind"></div-->
+			</div>
+			<span class="number-ind "></span>
+			<span class="type-ind"></span>
+		</div>
+		<div class="collapsible-body sections grid">
+
+		</div>
+	</li>
+	<section class="btn blockThumb waves-light waves-effect template">
+		
+	</section>
+</body>
+</html>
