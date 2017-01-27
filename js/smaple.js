@@ -431,6 +431,7 @@ var blocks = {
 			blocks.sets[i].ui.el.remove();
 		}
 		blocks.sets = [];
+		blocks.typeMap = {};
 	},
 	updateBlocksNumber: function (num) {
 		if (blocks.maxBlocks < num) {
