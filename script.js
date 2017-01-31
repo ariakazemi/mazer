@@ -288,13 +288,13 @@ var scene = {
 				typeArrays = blockTypeData.split("new");
 				typeArrays.splice(0,2);
 				y = typeArrays.length;
-				for (var j = 0;j < y;j++) {
-					typeArrays[j] = S(typeArrays[j]).between('{','}').s.split(',');
+				for (var ti = 0;ti < y;ti++) {
+					typeArrays[ti] = S(typeArrays[ti]).between('{','}').s.split(',');
 				}
 				rotateArrays = blockRotateData.split("new");
 				rotateArrays.splice(0,2);
-				for (var j = 0;j < y;j++) {
-					rotateArrays[j] = S(rotateArrays[j]).between('{','}').s.split(',');
+				for (var ri = 0;ri < y;ri++) {
+					rotateArrays[ri] = S(rotateArrays[ri]).between('{','}').s.split(',');
 				}
 				block.type = typeArrays;
 				block.rotation = rotateArrays;
