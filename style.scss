@@ -435,7 +435,7 @@ footer {
 			}
 			@for $i from 0 to 5 {
 				&[data-type="#{$i}"]:before {
-					background-image: url(Modules/Con/#{$i}.png);
+					background-image: url(Modules/convention/#{$i}.png);
 
 				}
 			}
@@ -450,7 +450,7 @@ footer.raw .module div {
 	
 		@for $i from 0 to 5 {
 			&[data-type="#{$i}"] {
-				background-image: url(Modules/Con/#{$i}.png);
+				background-image: url(Modules/convention/#{$i}.png);
 
 			}
 		}

@@ -1033,23 +1033,23 @@ footer {
 
 /* line 437, /Users/aria/Pictures/Games/MazeMaker/style.scss */
 #scene.convention .module[data-type="0"]:before, footer.convention .module[data-type="0"]:before {
-  background-image: url(Modules/Con/0.png); }
+  background-image: url(Modules/convention/0.png); }
 
 /* line 437, /Users/aria/Pictures/Games/MazeMaker/style.scss */
 #scene.convention .module[data-type="1"]:before, footer.convention .module[data-type="1"]:before {
-  background-image: url(Modules/Con/1.png); }
+  background-image: url(Modules/convention/1.png); }
 
 /* line 437, /Users/aria/Pictures/Games/MazeMaker/style.scss */
 #scene.convention .module[data-type="2"]:before, footer.convention .module[data-type="2"]:before {
-  background-image: url(Modules/Con/2.png); }
+  background-image: url(Modules/convention/2.png); }
 
 /* line 437, /Users/aria/Pictures/Games/MazeMaker/style.scss */
 #scene.convention .module[data-type="3"]:before, footer.convention .module[data-type="3"]:before {
-  background-image: url(Modules/Con/3.png); }
+  background-image: url(Modules/convention/3.png); }
 
 /* line 437, /Users/aria/Pictures/Games/MazeMaker/style.scss */
 #scene.convention .module[data-type="4"]:before, footer.convention .module[data-type="4"]:before {
-  background-image: url(Modules/Con/4.png); }
+  background-image: url(Modules/convention/4.png); }
 
 /* line 445, /Users/aria/Pictures/Games/MazeMaker/style.scss */
 footer.raw .module div {
@@ -1058,23 +1058,23 @@ footer.raw .module div {
 
 /* line 452, /Users/aria/Pictures/Games/MazeMaker/style.scss */
 .moduleType[data-type="0"] {
-  background-image: url(Modules/Con/0.png); }
+  background-image: url(Modules/convention/0.png); }
 
 /* line 452, /Users/aria/Pictures/Games/MazeMaker/style.scss */
 .moduleType[data-type="1"] {
-  background-image: url(Modules/Con/1.png); }
+  background-image: url(Modules/convention/1.png); }
 
 /* line 452, /Users/aria/Pictures/Games/MazeMaker/style.scss */
 .moduleType[data-type="2"] {
-  background-image: url(Modules/Con/2.png); }
+  background-image: url(Modules/convention/2.png); }
 
 /* line 452, /Users/aria/Pictures/Games/MazeMaker/style.scss */
 .moduleType[data-type="3"] {
-  background-image: url(Modules/Con/3.png); }
+  background-image: url(Modules/convention/3.png); }
 
 /* line 452, /Users/aria/Pictures/Games/MazeMaker/style.scss */
 .moduleType[data-type="4"] {
-  background-image: url(Modules/Con/4.png); }
+  background-image: url(Modules/convention/4.png); }
 
 /* line 461, /Users/aria/Pictures/Games/MazeMaker/style.scss */
 .template {
