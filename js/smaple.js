@@ -37,6 +37,7 @@ public class sample {\n\
 	public sample(){\n";
 var constructBodyType = "		blocks[{{typeIndex}},{{blockIndex}}].type = new int[{{rowNumbers}}][] {\n";
 var constructBodyRow = "			new int[]{";
+var constructSmallEnd = "}\n";
 var constructEnd = "};\n";
 var constructBodyRotation = "		blocks[{{typeIndex}},{{blockIndex}}].rotation = new int[{{rowNumbers}}][] {\n";
 var blocksTypeInfo = "		setInfo[{{typeIndex}}, 0] = {{input}};\n		setInfo[{{typeIndex}}, 1] = {{output}};\n		setInfo[{{typeIndex}}, 2] = {{blocksCount}};\n\n";
@@ -398,7 +399,7 @@ var blocks = {
 		for (var i = 0; i < blocks.sets.length; i++) {
 			result += blocks.sets[i].code();
 		}
-		return result + '	' + constructEnd + constructEnd;
+		return result + '	' + constructSmallEnd + constructEnd;
 	},
 	sets: [],
 	typeMap: {},

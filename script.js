@@ -244,7 +244,10 @@ var scene = {
 		}
 		
 		var all = S(allCode.getValue());
-		var blocksData = all.between("sample(){", "};\n};");
+		var firstIndex = all.s.indexOf("sample(){") + ("sample(){").length;
+		var lastIndex = all.s.lastIndexOf('}');
+		lastIndex = all.s.lastIndexOf('}', lastIndex-1);
+		var blocksData = all.s.slice(firstIndex, lastIndex);
 		var blockSetNumber = all.between("public block[,] blocks=new block[",",").s;
 		
 		var blocksDataArray = blocksData.split(';');
