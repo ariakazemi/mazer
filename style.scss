@@ -465,8 +465,42 @@ $color: #26a69a;
 	position: relative;
 	box-shadow: 0 0 0 3px $color inset;	
 	background-size: 100%;
+	.input-inds,.output-inds,.number-ind {
+		transition: transform 0.3s ease 0s;
+	}
+	button {
+		position: absolute;
+		left: 0;
+		width: 3em;
+		padding: 0;
+		height: 100%;
+		i {
+			width: 2em;
+			margin: 0;
+			position: absolute;
+			top:0.2em;
+			left:0;
+			bottom: 0;
+			
+		}
+		transition: all 0.3s ease 0s;
+		opacity: 0;
+		transform: translateX(-10px);
+		z-index: -1;
+	}
 }
-
+.set.active {
+	.collapsible-header {
+		.input-inds,.output-inds,.number-ind {
+			transform: translate(3em, -50%) !important;
+		}
+		button {
+			opacity: 1;
+			z-index: 10;
+			transform: translateX(0);
+		}
+	}
+}
 
 .input-ind, .output-ind{
 
@@ -474,6 +508,16 @@ $color: #26a69a;
 	height: 2px;
 	background-color: $color;
 	position: relative;
+		&:before {
+			content: "";
+			display: block;
+			width: 7px;
+			height: 8px;
+			left: 2px;
+			background-color: $color;
+			position: absolute;
+			
+		}
 	&.on {
 		&:before {
 			content: "";
@@ -481,17 +525,16 @@ $color: #26a69a;
 			width:3px;
 			height: 13px;
 			left: 4px;
-			background-color: $color;
+			background-color: palevioletred;
 			position: absolute;
-			
 		}
 	}
 
 }
-.input-ind.on:before {
+.input-ind:before {
 	bottom:0;
 }
-.output-ind.on:before {
+.output-ind:before {
 	top: 0;
 }
 

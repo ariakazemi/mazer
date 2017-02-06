@@ -355,16 +355,28 @@ var blockSet = function (arr, input, output, x, type) {
 		window._selectedBlock = undefined;
 		that.selectedBlock = undefined;
 	}
+	this.remove = function () {
+		//clear from set array
+		//clear element
+		//clear set Map
+		
+		var i = blocks.sets.indexOf(that);
+		blocks.sets.splice(i,1);
+		
+		that.ui.el.remove();
+		
+		delete blocks.typeMap[that.type];
+	}
 	this.ui = {
 		el: undefined,
 		make: function () {
 			var setUi = $(".wayGroup li[data-type='TT']".replace("TT", that.type));
 			if (setUi.length == 0) {
-				setUi = $(".set.template").clone().removeClass("template").appendTo(".wayGroup").attr("data-type", that.type);
+				setUi = $(".set.template").clone().removeClass("template").prependTo(".wayGroup").attr("data-type", that.type);
 
 				var input = parseInt(that.input).toString(2);
 				var output = parseInt(that.output).toString(2);
-
+				
 				while (input.length < that.x) input = '0' + input;
 				while (output.length < that.x) output = '0' + output;
 				for (var i = 0; i < that.x; i++) {
@@ -376,6 +388,7 @@ var blockSet = function (arr, input, output, x, type) {
 					setUi.find(".output-inds").append($("<div>").addClass("output-ind").addClass(ou));
 				}
 			}
+			setUi[0].set = that;
 			that.ui.el = setUi;
 
 			return setUi;
