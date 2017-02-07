@@ -211,6 +211,26 @@ var blockSample = function (set) {
 			}
 			block.set.removeBlock(block);
 			block.ui.el.remove();
+		},
+		this.serialize = function () {
+			//serialize type
+			//serialize rotation
+			//addX
+			var serialType = "", serialRotation  = "", serialX = "";
+
+			for (var i =0;i< block.type.length;i++) {
+				serialType += block.type[i].join('');
+			}
+			serialType = parseInt(serialType,5).toString(16);
+
+			for (var i =0;i< block.rotation.length;i++) {
+				serialRotation += block.rotation[i].join('');
+			}
+			serialRotation = parseInt(serialRotation,5).toString(16);
+
+			serialX = block.type[0].length.toString(16);
+
+			return serialType + '-' + serialRotation + '-' + serialX;
 		}
 	}
 }
@@ -280,6 +300,7 @@ var blockSet = function (arr, input, output, x, type) {
 	var splitter = ',';
 	var that = this;
 	this.array = [];
+	this.blockSer = {};
 	this.length = function () {
 		return that.array.length;
 	};
@@ -308,10 +329,18 @@ var blockSet = function (arr, input, output, x, type) {
 		var block = blockSample(that);
 		block.write(data);
 		that.array.push(block);
-		that.ui.el.find(".number-ind").text(that.array.length);
-		blocks.updateBlocksNumber(that.array.length);
-		block.ui.make();
-		return block;
+		var serial = block.serialize();
+		if (that.blockSer[serial] == undefined) {
+			that.blockSer[serial] = block;
+			that.ui.el.find(".number-ind").text(that.array.length);
+			blocks.updateBlocksNumber(that.array.length);
+			block.ui.make();
+			return block;
+		}
+		else {
+			return false;
+		}
+
 	}
 	this.code = function () {
 		var typeIndex = that.index();

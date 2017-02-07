@@ -1178,23 +1178,24 @@ footer.raw .module div {
   border-radius: 2px;
   overflow: hidden; }
 
-/* line 569, /Users/aria/Pictures/Games/MazeMaker/style.scss */
-.group button:not(:last-child) {
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-  padding-right: 1rem !important; }
+/* line 568, /Users/aria/Pictures/Games/MazeMaker/style.scss */
+.group {
+  display: inline-block; }
+  /* line 570, /Users/aria/Pictures/Games/MazeMaker/style.scss */
+  .group button:not(:last-child) {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    padding-right: 1rem !important; }
+  /* line 575, /Users/aria/Pictures/Games/MazeMaker/style.scss */
+  .group button:not(:first-child) {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    padding-left: 1rem !important; }
+  /* line 580, /Users/aria/Pictures/Games/MazeMaker/style.scss */
+  .group button.just-icon {
+    padding-right: 1rem !important; }
 
-/* line 574, /Users/aria/Pictures/Games/MazeMaker/style.scss */
-.group button:not(:first-child) {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  padding-left: 1rem !important; }
-
-/* line 579, /Users/aria/Pictures/Games/MazeMaker/style.scss */
-.group button.just-icon {
-  padding-right: 1rem !important; }
-
-/* line 584, /Users/aria/Pictures/Games/MazeMaker/style.scss */
+/* line 585, /Users/aria/Pictures/Games/MazeMaker/style.scss */
 .fileRead {
   margin-right: 1em; }
 

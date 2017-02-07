@@ -566,6 +566,7 @@ $color: #26a69a;
 }
 
 .group {
+	display: inline-block;
 	button:not(:last-child) {
 		border-top-right-radius: 0 !important;
 		border-bottom-right-radius: 0 !important;

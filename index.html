@@ -33,7 +33,14 @@
 		
 		<article id="code">
 		<p>
+
+			<span class="group">
 			<button class="waves-effect waves-light btn" onclick="scene.readAll(true)">Read</button>
+
+				<button class="waves-effect waves-light btn right just-icon tooltipped" onclick="scene.readAll(false)" data-tooltip="Read and Merge">
+			<i class="material-icons">add</i>
+				</button>
+			</span>
 			<button class="waves-effect waves-light orange darken-3 btn" onclick="scene.writeAll()">Write</button>
 			<button class="waves-effect waves-light btn right" onclick="downloadAll()"><i class=" medium material-icons right">file_download</i>Get</button>
 		</p>
