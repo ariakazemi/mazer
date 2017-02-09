@@ -391,6 +391,28 @@ var blockSet = function (arr, input, output, x, type) {
 		//clear element
 		//clear set Map
 		
+		var follow = blocks.get.outsOf(that.input);
+		//find sets that lead from this
+		var leads = blocks.get.insOf(that.output);
+		//store the numbers
+		//add these numbers to sets header;
+
+		for (var i = 0; i < follow.length;i++) {
+			var currentSet = blocks.typeMap[follow[i]];
+
+			var currentLinks = currentSet.ui.getLinks();
+
+
+			currentLinks.leads--;
+			currentSet.ui.updateLinks(currentLinks, true);
+		}
+		for (var i = 0; i < leads.length;i++) {
+			var currentSet = blocks.typeMap[leads[i]];
+			var currentLinks = currentSet.ui.getLinks();
+			currentLinks.follow--;
+			currentSet.ui.updateLinks(currentLinks, true);
+		}
+		
 		var i = blocks.sets.indexOf(that);
 		blocks.sets.splice(i,1);
 		
@@ -404,6 +426,10 @@ var blockSet = function (arr, input, output, x, type) {
 			var setUi = $(".wayGroup li[data-type='TT']".replace("TT", that.type));
 			if (setUi.length == 0) {
 				setUi = $(".set.template").clone().removeClass("template").prependTo(".wayGroup").attr("data-type", that.type);
+				
+				setUi[0].set = that;
+				that.ui.el = setUi;
+
 
 				var input = parseInt(that.input).toString(2);
 				var output = parseInt(that.output).toString(2);
@@ -418,11 +444,49 @@ var blockSet = function (arr, input, output, x, type) {
 					setUi.find(".input-inds").append($("<div>").addClass("input-ind").addClass(en));
 					setUi.find(".output-inds").append($("<div>").addClass("output-ind").addClass(ou));
 				}
-			}
-			setUi[0].set = that;
-			that.ui.el = setUi;
+				
+				//find Sets that follow to this
+				var follow = blocks.get.outsOf(that.input);
+				//find sets that lead from this
+				var leads = blocks.get.insOf(that.output);
+				//store the numbers
+				//add these numbers to sets header;
+				that.ui.updateLinks({follow: follow, leads: leads});
+				
+				for (var i = 0; i < follow.length;i++) {
+					var currentSet = blocks.typeMap[follow[i]];
+					
+					var currentLinks = currentSet.ui.getLinks();
+					
 
+					currentLinks.leads++;
+					currentSet.ui.updateLinks(currentLinks, true);
+				}
+				for (var i = 0; i < leads.length;i++) {
+					var currentSet = blocks.typeMap[leads[i]];
+					var currentLinks = currentSet.ui.getLinks();
+					currentLinks.follow++;
+					currentSet.ui.updateLinks(currentLinks, true);
+				}
+			}
+			
 			return setUi;
+		},
+		updateLinks: function (data, number) {
+			if (number == true) {
+			that.ui.el.find(".follow-info").text(data.follow);
+			that.ui.el.find(".leads-info").text(data.leads);	
+			}
+			else {
+			that.ui.el.find(".follow-info").text(data.follow.length);
+			that.ui.el.find(".leads-info").text(data.leads.length);
+			}
+		},
+		getLinks: function () {
+			return  {
+				follow: that.ui.el.find(".follow-info").text(),
+				leads: that.ui.el.find(".leads-info").text()};
+			
 		}
 
 	}
@@ -481,6 +545,43 @@ var blocks = {
 	updateBlocksNumber: function (num) {
 		if (blocks.maxBlocks < num) {
 			blocks.maxBlocks = num;
+		}
+	},
+	serializeSets: function () {
+		var keyLine = "";
+		for (var i = 0; i < blocks.sets.length; i++) {
+			keyLine += blocks.sets[i].type + '-';
+		}
+		
+		return keyLine;
+	},
+	get: {
+		insOf: function (input) {
+			var line = blocks.serializeSets();
+			if (line == "") {
+				return [];
+			}
+			var inputArrays = line.split(input + ',');
+			inputArrays = inputArrays.slice(1);
+			for (var i = 0;i < inputArrays.length;i++) {
+			
+				inputArrays[i] = input + ',' + inputArrays[i].split('-')[0];
+			}
+			return inputArrays;
+		},
+		outsOf: function (out) {
+			var line = blocks.serializeSets();
+			if (line == "") {
+				return [];
+			}
+			var outArrays = line.split(',' + out);
+			outArrays = outArrays.slice(0,-1);
+			for (var i = 0;i < outArrays.length;i++) {
+				var split = outArrays[i].split('-');
+				outArrays[i] = split[split.length - 1] + ',' + out;
+				
+			}
+			return outArrays;
 		}
 	},
 	maxBlocks: 0

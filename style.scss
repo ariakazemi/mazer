@@ -60,7 +60,7 @@ aside {
 		bottom: 0;
 		height: 100%;
 		text-align: right;
-		.number-ind {
+		.number-ind, .follow-info,.leads-info {
 			background-color: palevioletred;
 			color: white;
 			padding: 0.2em 0.7em;
@@ -74,6 +74,16 @@ aside {
 			line-height: 1.1em;
 			top:50%;
 			transform: translateY(-50%);
+		}
+		.follow-info {
+			background-color: orange;
+			left: 8em;
+			border-radius: 1em 0 0 1em;
+		}
+		.leads-info {
+			border-radius: 0 1em 1em 0;
+			background-color: teal;
+			left: 9.9em;
 		}
 		.type-ind {
 			counter-increment: ind;
@@ -465,7 +475,7 @@ $color: #26a69a;
 	position: relative;
 	box-shadow: 0 0 0 3px $color inset;	
 	background-size: 100%;
-	.input-inds,.output-inds,.number-ind {
+	.input-inds,.output-inds,.number-ind, .follow-info,.leads-info {
 		transition: transform 0.3s ease 0s;
 	}
 	button {
@@ -491,7 +501,7 @@ $color: #26a69a;
 }
 .set.active {
 	.collapsible-header {
-		.input-inds,.output-inds,.number-ind {
+		.input-inds,.output-inds,.number-ind, .follow-info,.leads-info {
 			transform: translate(3em, -50%) !important;
 		}
 		button {
