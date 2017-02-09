@@ -329,9 +329,10 @@ var blockSet = function (arr, input, output, x, type) {
 	this.makeBlock = function (data) {
 		var block = blockSample(that);
 		block.write(data);
-		that.array.push(block);
+		
 		var serial = block.serialize();
 		if (that.blockSer[serial] == undefined) {
+			that.array.push(block);
 			that.blockSer[serial] = block;
 			that.ui.el.find(".number-ind").text(that.array.length);
 			blocks.updateBlocksNumber(that.array.length);
