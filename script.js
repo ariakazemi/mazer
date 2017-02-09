@@ -286,7 +286,7 @@ var scene = {
 				blockTypeData = blocksDataArray[k];
 				blockRotateData = blocksDataArray[k+1];
 				
-				block = set.makeBlock();
+
 				
 				typeArrays = blockTypeData.split("new");
 				typeArrays.splice(0,2);
@@ -299,8 +299,8 @@ var scene = {
 				for (var ri = 0;ri < y;ri++) {
 					rotateArrays[ri] = S(rotateArrays[ri]).between('{','}').s.split(',');
 				}
-				block.type = typeArrays;
-				block.rotation = rotateArrays;
+
+				block = set.makeBlock({type: typeArrays, rotation: rotateArrays});
 			}
 			setStartIndex += 3 + setBlocksNumber * 2;
 		}

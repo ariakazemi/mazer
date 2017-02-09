@@ -71,7 +71,8 @@ var readBlock = function (block) {
 }
 var writeBlock = function (block, data) {
 	if (data) {
-		
+		block.type = data.type;
+		block.rotation = data.rotation;
 	} else {
 		var x = $("#x").val();
 		var y = $("#y").val();
