@@ -561,7 +561,7 @@ var blocks = {
 			if (line == "") {
 				return [];
 			}
-			var inputArrays = line.split(input + ',');
+			var inputArrays = line.split('-' + input + ',');
 			inputArrays = inputArrays.slice(1);
 			for (var i = 0;i < inputArrays.length;i++) {
 			
@@ -574,7 +574,7 @@ var blocks = {
 			if (line == "") {
 				return [];
 			}
-			var outArrays = line.split(',' + out);
+			var outArrays = line.split(',' + out + '-');
 			outArrays = outArrays.slice(0,-1);
 			for (var i = 0;i < outArrays.length;i++) {
 				var split = outArrays[i].split('-');
