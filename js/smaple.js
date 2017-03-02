@@ -391,26 +391,17 @@ var blockSet = function (arr, input, output, x, type) {
 		//clear element
 		//clear set Map
 		
-		var follow = blocks.get.outsOf(that.input);
-		//find sets that lead from this
-		var leads = blocks.get.insOf(that.output);
+
 		//store the numbers
 		//add these numbers to sets header;
 
-		for (var i = 0; i < follow.length;i++) {
-			var currentSet = blocks.typeMap[follow[i]];
-
-			var currentLinks = currentSet.ui.getLinks();
-
-
-			currentLinks.leads--;
-			currentSet.ui.updateLinks(currentLinks, true);
+		for (var i = 0; i < that.ui.links.follows.length;i++) {
+			var currentSet = blocks.typeMap[that.ui.links.follows[i]];
+			currentSet.ui.links.removeLead(that.type);
 		}
-		for (var i = 0; i < leads.length;i++) {
-			var currentSet = blocks.typeMap[leads[i]];
-			var currentLinks = currentSet.ui.getLinks();
-			currentLinks.follow--;
-			currentSet.ui.updateLinks(currentLinks, true);
+		for (var i = 0; i < that.ui.links.leads.length;i++) {
+			var currentSet = blocks.typeMap[that.ui.links.leads[i]];
+			currentSet.ui.links.removeFollow(that.type);
 		}
 		
 		var i = blocks.sets.indexOf(that);
@@ -446,47 +437,89 @@ var blockSet = function (arr, input, output, x, type) {
 				}
 				
 				//find Sets that follow to this
-				var follow = blocks.get.outsOf(that.input);
+				var follows = blocks.get.outsOf(that.input);
 				//find sets that lead from this
 				var leads = blocks.get.insOf(that.output);
 				//store the numbers
 				//add these numbers to sets header;
-				that.ui.updateLinks({follow: follow, leads: leads});
+				that.ui.links.update({follows: follows, leads: leads});
 				
-				for (var i = 0; i < follow.length;i++) {
-					var currentSet = blocks.typeMap[follow[i]];
+				for (var i = 0; i < follows.length;i++) {
+					var currentSet = blocks.typeMap[follows[i]];
+					currentSet.ui.links.addLead(that.type);
 					
-					var currentLinks = currentSet.ui.getLinks();
-					
-
-					currentLinks.leads++;
-					currentSet.ui.updateLinks(currentLinks, true);
+//					var currentLinks = currentSet.ui.getLinks();
+//					currentLinks.leads++;
+//					currentSet.ui.updateLinks(currentLinks, true);
 				}
 				for (var i = 0; i < leads.length;i++) {
 					var currentSet = blocks.typeMap[leads[i]];
-					var currentLinks = currentSet.ui.getLinks();
-					currentLinks.follow++;
-					currentSet.ui.updateLinks(currentLinks, true);
+					currentSet.ui.links.addFollow(that.type);
+					
+//					var currentLinks = currentSet.ui.getLinks();
+//					currentLinks.follow++;
+//					currentSet.ui.updateLinks(currentLinks, true);
 				}
 			}
 			
 			return setUi;
 		},
-		updateLinks: function (data, number) {
-			if (number == true) {
-			that.ui.el.find(".follow-info").text(data.follow);
-			that.ui.el.find(".leads-info").text(data.leads);	
-			}
-			else {
-			that.ui.el.find(".follow-info").text(data.follow.length);
-			that.ui.el.find(".leads-info").text(data.leads.length);
-			}
+		updateLinks: function (data) {
+			var followNum, leadsNum;
+			followNum = (typeof data.follow == "number" ? data.follow : data.follow.length);
+			leadsNum = (typeof data.leads == "number" ? data.leads : data.leads.length);
+				
+			that.ui.el.find(".follow-info").text(followNum);
+			that.ui.el.find(".leads-info").text(leadsNum);
 		},
 		getLinks: function () {
+			
 			return  {
 				follow: that.ui.el.find(".follow-info").text(),
-				leads: that.ui.el.find(".leads-info").text()};
-			
+				leads: that.ui.el.find(".leads-info").text()
+			};
+		},
+		links: {
+			leads: [],
+			follows: [],
+			addFollow: function (followType) {
+				if (that.ui.links.follows.indexOf(followType) == -1) {
+					that.ui.links.follows.push(followType);
+					that.ui.el.find(".follow-info").text(that.ui.links.follows.length);
+				}
+			},
+			addLead: function (leadType) {
+				if (that.ui.links.leads.indexOf(leadType) == -1) {
+					that.ui.links.leads.push(leadType);
+					that.ui.el.find(".leads-info").text(that.ui.links.leads.length);
+				}
+			},
+			removeFollow: function (followType) {
+				if (that.ui.links.follows.indexOf(followType) != -1) {
+					var keyindex = that.ui.links.follows.indexOf(followType);
+					that.ui.links.follows.splice(keyindex, 1);
+					that.ui.el.find(".follow-info").text(that.ui.links.follows.length);
+				}
+			},
+			removeLead: function (leadType) {
+					if (that.ui.links.leads.indexOf(leadType) != -1) {
+						var keyindex = that.ui.links.leads.indexOf(leadType);
+					that.ui.links.leads.splice(keyindex, 1);
+					that.ui.el.find(".leads-info").text(that.ui.links.leads.length);
+				}
+			},
+			update: function (data) {
+				var followNum, leadsNum;
+				followNum = data.follows.length;
+				leadsNum = data.leads.length;
+
+				that.ui.el.find(".follow-info").text(followNum);
+				that.ui.el.find(".leads-info").text(leadsNum);
+				
+				that.ui.links.follows = data.follows;
+				that.ui.links.leads = data.leads;
+				
+			}
 		}
 
 	}
@@ -557,10 +590,15 @@ var blocks = {
 	},
 	get: {
 		insOf: function (input) {
+			// 19,8-8,19-19,24
+			// 14,8-8,19-19,24
 			var line = blocks.serializeSets();
 			if (line == "") {
 				return [];
 			}
+			line = '-'+line;
+			// -19,8-8,19-19,24
+			// -14,8-8,19-19,24
 			var inputArrays = line.split('-' + input + ',');
 			inputArrays = inputArrays.slice(1);
 			for (var i = 0;i < inputArrays.length;i++) {
@@ -570,11 +608,13 @@ var blocks = {
 			return inputArrays;
 		},
 		outsOf: function (out) {
+			// 12,24-42,24-13,15-16,24-
 			var line = blocks.serializeSets();
 			if (line == "") {
 				return [];
 			}
 			var outArrays = line.split(',' + out + '-');
+			// ["12","42","13,15-16",""]
 			outArrays = outArrays.slice(0,-1);
 			for (var i = 0;i < outArrays.length;i++) {
 				var split = outArrays[i].split('-');
