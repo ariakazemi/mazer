@@ -198,7 +198,7 @@ var blockSample = function (set) {
 			make: function () {
 				var tmp = $(".blockThumb.template").clone().removeClass("template");
 				tmp[0].block = block;
-				block.set.ui.el.find(".sections").append(tmp);
+				block.set.ui.el.find(".sections article").append(tmp);
 				tmp.click(function () {
 					block.set.select(block);
 				});
@@ -395,6 +395,7 @@ var blockSet = function (arr, input, output, x, type) {
 		//store the numbers
 		//add these numbers to sets header;
 
+		that.ui.deactivateLinks();
 		for (var i = 0; i < that.ui.links.follows.length;i++) {
 			var currentSet = blocks.typeMap[that.ui.links.follows[i]];
 			currentSet.ui.links.removeLead(that.type);
@@ -420,8 +421,14 @@ var blockSet = function (arr, input, output, x, type) {
 				
 				setUi[0].set = that;
 				that.ui.el = setUi;
-
-
+				
+				setUi.on("collapseOpen", function () {
+					that.ui.links.activateLinks();
+				});
+				setUi.on("collapseClose", function () {
+					that.ui.links.deactivateLinks();
+				});
+				
 				var input = parseInt(that.input).toString(2);
 				var output = parseInt(that.output).toString(2);
 				
@@ -519,6 +526,32 @@ var blockSet = function (arr, input, output, x, type) {
 				that.ui.links.follows = data.follows;
 				that.ui.links.leads = data.leads;
 				
+			},
+			activateLinks: function () {
+				for (var i = 0; i < that.ui.links.leads.length; i++) {
+					var set = blocks.typeMap[that.ui.links.leads[i]].ui.active("follow");
+				}
+				for (var i = 0; i < that.ui.links.follows.length; i++) {
+					var set = blocks.typeMap[that.ui.links.follows[i]].ui.active("lead");
+				}
+			},
+			deactivateLinks: function () {
+				for (var i = 0; i < that.ui.links.leads.length; i++) {
+					var set = blocks.typeMap[that.ui.links.leads[i]].ui.deactive("follow");
+				}
+				for (var i = 0; i < that.ui.links.follows.length; i++) {
+					var set = blocks.typeMap[that.ui.links.follows[i]].ui.deactive("lead");
+				}
+			}
+		},
+		active: function (mode) {
+			if (mode) {
+				that.ui.el.addClass("active-"+mode);
+			}
+		},
+		deactive: function (mode) {
+			if (mode) {
+				that.ui.el.removeClass("active-"+mode);
 			}
 		}
 

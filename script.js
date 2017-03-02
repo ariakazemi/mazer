@@ -380,7 +380,11 @@ $(function () {
 		sceneMaker.changeType($("#scene .module.selected")[0], parseInt(type[type.length - 1]));
 	});
 	$('select').material_select();
-	$('.collapsible').collapsible();
+	$('.collapsible').collapsible({onOpen: function (el) {
+		$(el).trigger("collapseOpen");
+	}, onClose: function (el) {
+		$(el).trigger("collapseClose");
+	}});
 	$("body").on("keydown", function (e) {
 		if (e.keyCode == 13) {
 			var module = $("#scene .module.selected");

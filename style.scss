@@ -60,6 +60,17 @@ aside {
 		bottom: 0;
 		height: 100%;
 		text-align: right;
+		li.set {
+	div.collapsible-body.sections.grid article {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		padding-bottom: 0.3em;
+		section {
+			width: 32%;
+		}
+	}
+}
 		.number-ind, .follow-info,.leads-info {
 			background-color: palevioletred;
 			color: white;
@@ -150,6 +161,7 @@ aside {
 			}
 		}
 	}
+	
 }
 .inputs {
 	display: flex;
@@ -499,6 +511,8 @@ $color: #26a69a;
 		z-index: -1;
 	}
 }
+
+ 
 .set.active {
 	.collapsible-header {
 		.input-inds,.output-inds,.number-ind, .follow-info,.leads-info {
@@ -511,6 +525,19 @@ $color: #26a69a;
 		}
 	}
 }
+
+.set.active-follow {
+	.collapsible-header {
+		background-color: rgba(teal,0.5) !important;
+	}
+}
+.set.active-lead {
+	.collapsible-header {
+		background-color: rgba(orange,0.5) !important;
+	}
+}
+
+
 
 .input-ind, .output-ind{
 
