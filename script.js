@@ -244,7 +244,10 @@ var scene = {
 		}
 		
 		var all = S(allCode.getValue());
-		var blocksData = all.between("sample(){", "};\n};");
+		var firstIndex = all.s.indexOf("sample(){") + ("sample(){").length;
+		var lastIndex = all.s.lastIndexOf('}');
+		lastIndex = all.s.lastIndexOf('}', lastIndex-1);
+		var blocksData = all.s.slice(firstIndex, lastIndex);
 		var blockSetNumber = all.between("public block[,] blocks=new block[",",").s;
 		
 		var blocksDataArray = blocksData.split(';');
@@ -283,21 +286,21 @@ var scene = {
 				blockTypeData = blocksDataArray[k];
 				blockRotateData = blocksDataArray[k+1];
 				
-				block = set.makeBlock();
+
 				
 				typeArrays = blockTypeData.split("new");
 				typeArrays.splice(0,2);
 				y = typeArrays.length;
-				for (var j = 0;j < y;j++) {
-					typeArrays[j] = S(typeArrays[j]).between('{','}').s.split(',');
+				for (var ti = 0;ti < y;ti++) {
+					typeArrays[ti] = S(typeArrays[ti]).between('{','}').s.split(',');
 				}
 				rotateArrays = blockRotateData.split("new");
 				rotateArrays.splice(0,2);
-				for (var j = 0;j < y;j++) {
-					rotateArrays[j] = S(rotateArrays[j]).between('{','}').s.split(',');
+				for (var ri = 0;ri < y;ri++) {
+					rotateArrays[ri] = S(rotateArrays[ri]).between('{','}').s.split(',');
 				}
-				block.type = typeArrays;
-				block.rotation = rotateArrays;
+
+				block = set.makeBlock({type: typeArrays, rotation: rotateArrays});
 			}
 			setStartIndex += 3 + setBlocksNumber * 2;
 		}
@@ -377,7 +380,11 @@ $(function () {
 		sceneMaker.changeType($("#scene .module.selected")[0], parseInt(type[type.length - 1]));
 	});
 	$('select').material_select();
-	$('.collapsible').collapsible();
+	$('.collapsible').collapsible({onOpen: function (el) {
+		$(el).trigger("collapseOpen");
+	}, onClose: function (el) {
+		$(el).trigger("collapseClose");
+	}});
 	$("body").on("keydown", function (e) {
 		if (e.keyCode == 13) {
 			var module = $("#scene .module.selected");
