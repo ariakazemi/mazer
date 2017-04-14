@@ -37,6 +37,7 @@ public class sample {\n\
 	public sample(){\n";
 var constructBodyType = "		blocks[{{typeIndex}},{{blockIndex}}].type = new int[{{rowNumbers}}][] {\n";
 var constructBodyRow = "			new int[]{";
+var constructSmallEnd = "}\n";
 var constructEnd = "};\n";
 var constructBodyRotation = "		blocks[{{typeIndex}},{{blockIndex}}].rotation = new int[{{rowNumbers}}][] {\n";
 var blocksTypeInfo = "		setInfo[{{typeIndex}}, 0] = {{input}};\n		setInfo[{{typeIndex}}, 1] = {{output}};\n		setInfo[{{typeIndex}}, 2] = {{blocksCount}};\n\n";
@@ -70,7 +71,8 @@ var readBlock = function (block) {
 }
 var writeBlock = function (block, data) {
 	if (data) {
-		
+		block.type = data.type;
+		block.rotation = data.rotation;
 	} else {
 		var x = $("#x").val();
 		var y = $("#y").val();
@@ -196,7 +198,7 @@ var blockSample = function (set) {
 			make: function () {
 				var tmp = $(".blockThumb.template").clone().removeClass("template");
 				tmp[0].block = block;
-				block.set.ui.el.find(".sections").append(tmp);
+				block.set.ui.el.find(".sections article").append(tmp);
 				tmp.click(function () {
 					block.set.select(block);
 				});
@@ -210,6 +212,26 @@ var blockSample = function (set) {
 			}
 			block.set.removeBlock(block);
 			block.ui.el.remove();
+		},
+		this.serialize = function () {
+			//serialize type
+			//serialize rotation
+			//addX
+			var serialType = "", serialRotation  = "", serialX = "";
+
+			for (var i =0;i< block.type.length;i++) {
+				serialType += block.type[i].join('');
+			}
+			serialType = parseInt(serialType,5).toString(16);
+
+			for (var i =0;i< block.rotation.length;i++) {
+				serialRotation += block.rotation[i].join('');
+			}
+			serialRotation = parseInt(serialRotation,5).toString(16);
+
+			serialX = block.type[0].length.toString(16);
+
+			return serialType + '-' + serialRotation + '-' + serialX;
 		}
 	}
 }
@@ -279,6 +301,7 @@ var blockSet = function (arr, input, output, x, type) {
 	var splitter = ',';
 	var that = this;
 	this.array = [];
+	this.blockSer = {};
 	this.length = function () {
 		return that.array.length;
 	};
@@ -306,11 +329,20 @@ var blockSet = function (arr, input, output, x, type) {
 	this.makeBlock = function (data) {
 		var block = blockSample(that);
 		block.write(data);
-		that.array.push(block);
-		that.ui.el.find(".number-ind").text(that.array.length);
-		blocks.updateBlocksNumber(that.array.length);
-		block.ui.make();
-		return block;
+		
+		var serial = block.serialize();
+		if (that.blockSer[serial] == undefined) {
+			that.array.push(block);
+			that.blockSer[serial] = block;
+			that.ui.el.find(".number-ind").text(that.array.length);
+			blocks.updateBlocksNumber(that.array.length);
+			block.ui.make();
+			return block;
+		}
+		else {
+			return false;
+		}
+
 	}
 	this.code = function () {
 		var typeIndex = that.index();
@@ -354,16 +386,52 @@ var blockSet = function (arr, input, output, x, type) {
 		window._selectedBlock = undefined;
 		that.selectedBlock = undefined;
 	}
+	this.remove = function () {
+		//clear from set array
+		//clear element
+		//clear set Map
+		
+
+		//store the numbers
+		//add these numbers to sets header;
+
+		that.ui.deactivateLinks();
+		for (var i = 0; i < that.ui.links.follows.length;i++) {
+			var currentSet = blocks.typeMap[that.ui.links.follows[i]];
+			currentSet.ui.links.removeLead(that.type);
+		}
+		for (var i = 0; i < that.ui.links.leads.length;i++) {
+			var currentSet = blocks.typeMap[that.ui.links.leads[i]];
+			currentSet.ui.links.removeFollow(that.type);
+		}
+		
+		var i = blocks.sets.indexOf(that);
+		blocks.sets.splice(i,1);
+		
+		that.ui.el.remove();
+		
+		delete blocks.typeMap[that.type];
+	}
 	this.ui = {
 		el: undefined,
 		make: function () {
 			var setUi = $(".wayGroup li[data-type='TT']".replace("TT", that.type));
 			if (setUi.length == 0) {
-				setUi = $(".set.template").clone().removeClass("template").appendTo(".wayGroup").attr("data-type", that.type);
-
+				setUi = $(".set.template").clone().removeClass("template").prependTo(".wayGroup").attr("data-type", that.type);
+				
+				setUi[0].set = that;
+				that.ui.el = setUi;
+				
+				setUi.on("collapseOpen", function () {
+					that.ui.links.activateLinks();
+				});
+				setUi.on("collapseClose", function () {
+					that.ui.links.deactivateLinks();
+				});
+				
 				var input = parseInt(that.input).toString(2);
 				var output = parseInt(that.output).toString(2);
-
+				
 				while (input.length < that.x) input = '0' + input;
 				while (output.length < that.x) output = '0' + output;
 				for (var i = 0; i < that.x; i++) {
@@ -374,10 +442,117 @@ var blockSet = function (arr, input, output, x, type) {
 					setUi.find(".input-inds").append($("<div>").addClass("input-ind").addClass(en));
 					setUi.find(".output-inds").append($("<div>").addClass("output-ind").addClass(ou));
 				}
+				
+				//find Sets that follow to this
+				var follows = blocks.get.outsOf(that.input);
+				//find sets that lead from this
+				var leads = blocks.get.insOf(that.output);
+				//store the numbers
+				//add these numbers to sets header;
+				that.ui.links.update({follows: follows, leads: leads});
+				
+				for (var i = 0; i < follows.length;i++) {
+					var currentSet = blocks.typeMap[follows[i]];
+					currentSet.ui.links.addLead(that.type);
+					
+//					var currentLinks = currentSet.ui.getLinks();
+//					currentLinks.leads++;
+//					currentSet.ui.updateLinks(currentLinks, true);
+				}
+				for (var i = 0; i < leads.length;i++) {
+					var currentSet = blocks.typeMap[leads[i]];
+					currentSet.ui.links.addFollow(that.type);
+					
+//					var currentLinks = currentSet.ui.getLinks();
+//					currentLinks.follow++;
+//					currentSet.ui.updateLinks(currentLinks, true);
+				}
 			}
-			that.ui.el = setUi;
-
+			
 			return setUi;
+		},
+		updateLinks: function (data) {
+			var followNum, leadsNum;
+			followNum = (typeof data.follow == "number" ? data.follow : data.follow.length);
+			leadsNum = (typeof data.leads == "number" ? data.leads : data.leads.length);
+				
+			that.ui.el.find(".follow-info").text(followNum);
+			that.ui.el.find(".leads-info").text(leadsNum);
+		},
+		getLinks: function () {
+			
+			return  {
+				follow: that.ui.el.find(".follow-info").text(),
+				leads: that.ui.el.find(".leads-info").text()
+			};
+		},
+		links: {
+			leads: [],
+			follows: [],
+			addFollow: function (followType) {
+				if (that.ui.links.follows.indexOf(followType) == -1) {
+					that.ui.links.follows.push(followType);
+					that.ui.el.find(".follow-info").text(that.ui.links.follows.length);
+				}
+			},
+			addLead: function (leadType) {
+				if (that.ui.links.leads.indexOf(leadType) == -1) {
+					that.ui.links.leads.push(leadType);
+					that.ui.el.find(".leads-info").text(that.ui.links.leads.length);
+				}
+			},
+			removeFollow: function (followType) {
+				if (that.ui.links.follows.indexOf(followType) != -1) {
+					var keyindex = that.ui.links.follows.indexOf(followType);
+					that.ui.links.follows.splice(keyindex, 1);
+					that.ui.el.find(".follow-info").text(that.ui.links.follows.length);
+				}
+			},
+			removeLead: function (leadType) {
+					if (that.ui.links.leads.indexOf(leadType) != -1) {
+						var keyindex = that.ui.links.leads.indexOf(leadType);
+					that.ui.links.leads.splice(keyindex, 1);
+					that.ui.el.find(".leads-info").text(that.ui.links.leads.length);
+				}
+			},
+			update: function (data) {
+				var followNum, leadsNum;
+				followNum = data.follows.length;
+				leadsNum = data.leads.length;
+
+				that.ui.el.find(".follow-info").text(followNum);
+				that.ui.el.find(".leads-info").text(leadsNum);
+				
+				that.ui.links.follows = data.follows;
+				that.ui.links.leads = data.leads;
+				
+			},
+			activateLinks: function () {
+				for (var i = 0; i < that.ui.links.leads.length; i++) {
+					var set = blocks.typeMap[that.ui.links.leads[i]].ui.active("follow");
+				}
+				for (var i = 0; i < that.ui.links.follows.length; i++) {
+					var set = blocks.typeMap[that.ui.links.follows[i]].ui.active("lead");
+				}
+			},
+			deactivateLinks: function () {
+				for (var i = 0; i < that.ui.links.leads.length; i++) {
+					var set = blocks.typeMap[that.ui.links.leads[i]].ui.deactive("follow");
+				}
+				for (var i = 0; i < that.ui.links.follows.length; i++) {
+					var set = blocks.typeMap[that.ui.links.follows[i]].ui.deactive("lead");
+				}
+			}
+		},
+		active: function (mode) {
+			if (mode) {
+				that.ui.el.addClass("active-"+mode);
+			}
+		},
+		deactive: function (mode) {
+			if (mode) {
+				that.ui.el.removeClass("active-"+mode);
+			}
 		}
 
 	}
@@ -398,7 +573,7 @@ var blocks = {
 		for (var i = 0; i < blocks.sets.length; i++) {
 			result += blocks.sets[i].code();
 		}
-		return result + '	' + constructEnd + constructEnd;
+		return result + '	' + constructSmallEnd + constructEnd;
 	},
 	sets: [],
 	typeMap: {},
@@ -431,10 +606,55 @@ var blocks = {
 			blocks.sets[i].ui.el.remove();
 		}
 		blocks.sets = [];
+		blocks.typeMap = {};
 	},
 	updateBlocksNumber: function (num) {
 		if (blocks.maxBlocks < num) {
 			blocks.maxBlocks = num;
+		}
+	},
+	serializeSets: function () {
+		var keyLine = "";
+		for (var i = 0; i < blocks.sets.length; i++) {
+			keyLine += blocks.sets[i].type + '-';
+		}
+		
+		return keyLine;
+	},
+	get: {
+		insOf: function (input) {
+			// 19,8-8,19-19,24
+			// 14,8-8,19-19,24
+			var line = blocks.serializeSets();
+			if (line == "") {
+				return [];
+			}
+			line = '-'+line;
+			// -19,8-8,19-19,24
+			// -14,8-8,19-19,24
+			var inputArrays = line.split('-' + input + ',');
+			inputArrays = inputArrays.slice(1);
+			for (var i = 0;i < inputArrays.length;i++) {
+			
+				inputArrays[i] = input + ',' + inputArrays[i].split('-')[0];
+			}
+			return inputArrays;
+		},
+		outsOf: function (out) {
+			// 12,24-42,24-13,15-16,24-
+			var line = blocks.serializeSets();
+			if (line == "") {
+				return [];
+			}
+			var outArrays = line.split(',' + out + '-');
+			// ["12","42","13,15-16",""]
+			outArrays = outArrays.slice(0,-1);
+			for (var i = 0;i < outArrays.length;i++) {
+				var split = outArrays[i].split('-');
+				outArrays[i] = split[split.length - 1] + ',' + out;
+				
+			}
+			return outArrays;
 		}
 	},
 	maxBlocks: 0

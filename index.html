@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Squence Maker</title>
-	      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	
 	<link rel="stylesheet" href="css/materialize.css">
 		<link rel="stylesheet" href="style.css">
@@ -33,18 +33,24 @@
 		
 		<article id="code">
 		<p>
+
+			<span class="group">
 			<button class="waves-effect waves-light btn" onclick="scene.readAll(true)">Read</button>
+
+				<button class="waves-effect waves-light btn right just-icon tooltipped" onclick="scene.readAll(false)" data-tooltip="Read and Merge">
+			<i class="material-icons">add</i>
+				</button>
+			</span>
 			<button class="waves-effect waves-light orange darken-3 btn" onclick="scene.writeAll()">Write</button>
 			<button class="waves-effect waves-light btn right" onclick="downloadAll()"><i class=" medium material-icons right">file_download</i>Get</button>
 		</p>
 			<p class="codem">
-				<textarea id="code-text" class="materialize-textarea" name="" id="file" cols="30" rows="10">
-				hello
-			</textarea>
+				<textarea id="code-text" class="materialize-textarea" name="" id="file" cols="30" rows="10">sample.cs</textarea>
 			</p>
 		
 		</article>
 		<article id="blocks">
+			
 			<ul class="collapsible wayGroup" data-collapsible="accordion">
 				
 			</ul>
@@ -176,6 +182,7 @@
 	</div>
 	<li class="set template">
 		<div class="collapsible-header waves-effect waves-light">
+			<button class="btn btn-flat" onclick="$(this).closest('.set')[0].set.remove()"><i class="material-icons teal-text text-lighten-2">delete</i></button>
 			<div class="input-inds">
 				<!--div class="input-ind"></div-->
 			</div>
@@ -184,9 +191,11 @@
 			</div>
 			<span class="number-ind "></span>
 			<span class="type-ind"></span>
+			<span class="follow-info"></span>
+			<span class="leads-info"></span>
 		</div>
 		<div class="collapsible-body sections grid">
-
+			<article></article>
 		</div>
 	</li>
 	<section class="btn blockThumb waves-light waves-effect template">
@@ -194,3 +203,7 @@
 	</section>
 </body>
 </html>
+
+
+
+
